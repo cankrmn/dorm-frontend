@@ -88,7 +88,7 @@ const style = StyleSheet.create({
 		fontFamily: "Menlo-Regular",
 	},
 	hiddenCodeInput: {
-		position: "absolute",
+		position: "relative",
 		height: 0,
 		width: 0,
 		opacity: 0,

@@ -9,7 +9,7 @@ import Temp from "./Pages/tempPage";
 export default function App() {
 	return (
 		<View>
-			<Login />
+			<Verification />
 		</View>
 	);
 }

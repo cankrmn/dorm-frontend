@@ -3,10 +3,21 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Animated } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
-import MaskedView from "@react-native-masked-view/masked-view";
+import {MaskedView} from "@react-native-masked-view/masked-view";
 
 export default function ForgotPassword() {
 	const [email, onChangeEmail] = React.useState("");
+	const [flag, onChangeFlag] = React.useState(false);
+
+	const HandleButton = () => {
+		if(email == 'a') {
+			onChangeFlag(true);
+		}
+		else {
+			onChangeFlag(false);
+		}
+	}
+
 	return (
 		<View style={styles.Container}>
 			<TouchableOpacity
@@ -42,7 +53,7 @@ export default function ForgotPassword() {
 					Hiç sorun değil, sana mail atacağımız{"\n"}doğrulamaya tıklaman yeterli.
 				</Text>
 			</View>
-			<View style={styles.inputContainer}>
+			<View style={[styles.inputContainer, flag? styles.InvalidInput : styles.ValidInput]}>
 				<TextInput
 					style={styles.input}
 					onChangeText={onChangeEmail}
@@ -52,24 +63,34 @@ export default function ForgotPassword() {
 					//onFocus={handleFocus}
 				/>
 			</View>
-			<TouchableOpacity style={styles.button}>
-				<LinearGradient
-					colors={["#4136F1", "#8743FF"]}
-					end={{ x: 0.5, y: 0.5 }}
-					locations={[0, 1]}
-					style={{
-						height: "100%",
-						width: "100%",
-						borderRadius: 8,
-						justifyContent: "center",
-						alignItems: "center",
-					}}
-				>
+			{flag && 
+				<View style={{top: 175, left: 50}}>
+					<Text style={{color: "#FF4646", fontSize: 14, letterSpacing: 0.3}}>Bu mail adresi geçersiz.</Text>
+				</View>
+
+			}
+			<TouchableOpacity style={[styles.button, flag? {top: 210}:{top: 190}]} onPress={HandleButton}>
+			{!(email == "") ?
+					<LinearGradient
+						colors={["#4136F1", "#8743FF"]}
+						end={{ x: 0.5, y: 0.5 }}
+						locations={[0, 1]}
+						style={{
+							height: "100%",
+							width: "100%",
+							borderRadius: 8,
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<Text style={styles.buttonText}>Doğrulama Gönder</Text>
+					</LinearGradient> 
+					:
 					<Text style={styles.buttonText}>Doğrulama Gönder</Text>
-				</LinearGradient>
+				}
 			</TouchableOpacity>
 
-			<View style={{ alignSelf: "center", top: 320, flexDirection: "row" }}>
+			<View style={[{ alignSelf: "center", flexDirection: "row"}, flag? {top:230} : {top:210}]}>
 				<Text style={{ color: "#4A4A4A", letterSpacing: 0.3, fontSize: 15 }}>
 					Mailine ulaşamıyor musun?
 				</Text>
@@ -90,13 +111,20 @@ const styles = StyleSheet.create({
 		backgroundColor: "#ECECEC",
 	},
 	inputContainer: {
-		position: "absolute",
+		position: "relative",
 		width: 327,
 		height: 56,
-		backgroundColor: "#F8F8F8",
 		borderRadius: 8,
-		top: 265,
+		top: 170,
 		alignSelf: "center",
+	},
+	ValidInput: {
+		backgroundColor: "#F8F8F8",
+	},
+	InvalidInput: {
+		backgroundColor: "#F9EAEC",
+		borderColor: '#FF4646',
+		borderWidth: 1.5, 
 	},
 	input: {
 		width: 327,
@@ -106,10 +134,10 @@ const styles = StyleSheet.create({
 	},
 
 	button: {
-		position: "absolute",
+		backgroundColor: "#B6B6B6",
+		position: "relative",
 		width: 327,
 		height: 56,
-		top: 350,
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 8,
@@ -119,7 +147,7 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 	},
 	buttonText: {
-		position: "absolute",
+		position: "relative",
 		color: "#FFFFFF",
 		fontStyle: "normal",
 		fontWeight: "500",
