@@ -4,9 +4,10 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Animated } from "r
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import MaskedView from "@react-native-masked-view/masked-view";
+import commonStyles from "../styles/styles"
 
 export default function Verification() {
-	let email = "tcan@sabanciuniv.edu";	
+	let email = "tcan@sabanciuniv.edu";
 	const password = React.useRef([-1, -1, -1, -1]);
 
 	const [flag, onChangeFlag] = React.useState(false);
@@ -26,9 +27,7 @@ export default function Verification() {
 
 		input0.current.focus();
 
-		console.log(password.current)
-
-		if(password.current[0] == 0) {
+		if (password.current[0] == 0) {
 			onChangeFlag(true)
 		}
 		else {
@@ -36,10 +35,11 @@ export default function Verification() {
 		}
 
 		password.current = [-1, -1, -1, -1];
+		onChangeInput(false)
 	}
 
 	const checkIfDone = () => {
-		if(!(password.current.includes(-1) || password.current.includes(""))) {
+		if (!(password.current.includes(-1) || password.current.includes(""))) {
 			onChangeInput(true)
 		}
 		else {
@@ -48,184 +48,153 @@ export default function Verification() {
 	}
 
 	return (
-		<View style={styles.Container}>
-			<TouchableOpacity
-				style={{ position: "absolute", top: 60, left: 35, alignSelf: "flex-start" }}
-			>
-				<Ionicons name="arrow-back-outline" size={32} color="#B6B6B6" />
-			</TouchableOpacity>
-			<TouchableOpacity style={{ position: "absolute", top: 62, right: 35, alignSelf: "flex-end" }}>
-				<Text style={{ fontSize: 20, color: "#B6B6B6" }}>Atla</Text>
-			</TouchableOpacity>
+		<View style={commonStyles.Container}>
+			<View style={commonStyles.Header}>
+				<TouchableOpacity style={{ left: 35 }}>
+					<Ionicons name="arrow-back-outline" size={32} color="#B6B6B6" />
+				</TouchableOpacity>
+				<TouchableOpacity style={{ right: 35, top: 2 }}>
+					<Text style={{ fontSize: 22, color: "#B6B6B6" }}>Atla</Text>
+				</TouchableOpacity>
+			</View>
 
-			<MaskedView
-				style={{ top: 110, left: 36, height: 42 }}
-				maskElement={
-					<Text
-						style={{
-							alignSelf: "flex-start",
-							fontWeight: "bold",
-							fontSize: 36,
-						}}
+			<View style={commonStyles.innerContainer}>
+				<MaskedView
+					style={styles.maskedViewStyle}
+					maskElement={
+						<Text
+							style={{ fontWeight: "bold", fontSize: 30, }}
+						>
+							Doğrulama Kodun
+						</Text>
+					}
+				>
+					<LinearGradient
+						colors={["#4136F1", "#8743FF"]}
+						start={{ x: 0, y: 0 }}
+						end={{ x: 1, y: 1 }}
+						locations={[0, 1]}
 					>
-						Doğrulama Kodun
+						<Text
+							style={{
+								opacity: 0, fontWeight: "bold", fontSize: 30,
+							}}
+						>
+							Doğrulama Kodun
+						</Text>
+					</LinearGradient>
+				</MaskedView>
+
+				<View style={{ marginTop: 10, }}>
+					<Text style={[styles.text, { fontWeight: "bold" }]}>{email}</Text>
+					<Text style={styles.text}>
+						mail adresine gönderdiğimiz doğrulama{"\n"}kodunu bizimle paylaş
 					</Text>
+				</View>
+
+				<View style={{ marginTop: 30, flexDirection: "row", justifyContent: "space-between" }}>
+					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput, {}]}>
+						<TextInput
+							ref={input0}
+							style={commonStyles.input}
+							maxLength={1}
+							keyboardType={"numeric"}
+							textAlign={"center"}
+							selectTextOnFocus={true}
+							selectionColor={"rgb(146, 99, 230)"}
+							onChangeText={(text => { password.current[0] = text; checkIfDone(); if (text != '') input1.current.focus(); })}
+
+							autoFocus={true}
+						/>
+					</View>
+					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+						<TextInput
+							ref={input1}
+							style={commonStyles.input}
+							maxLength={1}
+							keyboardType={"numeric"}
+							textAlign={"center"}
+							selectTextOnFocus={true}
+							selectionColor={"rgb(146, 99, 230)"}
+							onChangeText={(text => { password.current[1] = text; checkIfDone(); if (text != '') input2.current.focus(); else input0.current.focus() })}
+						/>
+					</View>
+					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+						<TextInput
+							ref={input2}
+							style={commonStyles.input}
+							maxLength={1}
+							keyboardType={"numeric"}
+							textAlign={"center"}
+							selectTextOnFocus={true}
+							selectionColor={"rgb(146, 99, 230)"}
+							onChangeText={(text => { password.current[2] = text; checkIfDone(); if (text != '') input3.current.focus(); else input1.current.focus() })}
+						/>
+					</View>
+					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+						<TextInput
+							ref={input3}
+							style={commonStyles.input}
+							maxLength={1}
+							keyboardType={"numeric"}
+							textAlign={"center"}
+							selectTextOnFocus={true}
+							selectionColor={"rgb(146, 99, 230)"}
+							onChangeText={(text => { password.current[3] = text; checkIfDone(); if (text == '') input2.current.focus(); else input3.current.blur() })}
+							onChangeText={(text => { password.current[3] = text; checkIfDone(); if (text == '') input2.current.focus();})}
+						/>
+					</View>
+				</View>
+
+				{flag &&
+					<View style={{ marginTop: 10 }}>
+						<Text style={{ color: "#FF4646", fontSize: 14, letterSpacing: 0.3 }}>Bu mail adresi geçersiz.</Text>
+					</View>
+
 				}
-			>
-				<LinearGradient
-					colors={["#4136F1", "#8743FF"]}
-					end={{ x: 0.5, y: 0.5 }}
-					locations={[0, 1]}
-					style={{ height: 42, width: 261 }}
-				/>
-			</MaskedView>
 
-			<View style={{ top: 115, left: 40 }}>
-				<Text style={[styles.text, { fontWeight: "bold" }]}>{email}</Text>
-				<Text style={styles.text}>
-					mail adresine gönderdiğimiz doğrulama{"\n"}kodunu bizimle paylaş
-				</Text>
+				<TouchableOpacity style={[commonStyles.button, { marginTop: 30 }]} disabled={!isAllEntered} onPress={handleButton}>
+					{isAllEntered ?
+						<LinearGradient
+							colors={["#4136F1", "#8743FF"]}
+							start={{ x: 0, y: 0 }}
+							end={{ x: 1, y: 1 }}
+							locations={[0, 1]}
+							style={{
+								height: "100%",
+								width: "100%",
+								borderRadius: 8,
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<Text style={commonStyles.buttonText}>Doğrula</Text>
+						</LinearGradient>
+						:
+						<Text style={commonStyles.buttonText}>Doğrula</Text>
+					}
+				</TouchableOpacity>
+				<TouchableOpacity style={{ marginTop: 8, alignSelf: "center" }}>
+					<Text style={{ color: "#6B46D2", letterSpacing: 0.3, fontSize: 16, fontWeight: "bold" }}>
+						Tekrar Gönder
+					</Text>
+				</TouchableOpacity>
 			</View>
-
-			<View style={{ flexDirection: "row" }}>
-				<View style={[styles.inputContainer, flag? styles.InvalidInput : styles.ValidInput, { marginLeft: 25 }]}>
-					<TextInput
-						ref={input0}
-						style={styles.input}
-						maxLength={1}
-						keyboardType={"numeric"}
-						textAlign={"center"}
-						selectTextOnFocus={true}
-						selectionColor={"rgb(146, 99, 230)"}
-						onChangeText={(text => {password.current[0] = text; checkIfDone(); if(text !='') input1.current.focus();})}
-
-						autoFocus={true}
-					/>
-				</View>
-				<View style={[styles.inputContainer, flag? styles.InvalidInput : styles.ValidInput]}>
-					<TextInput
-						ref={input1}
-						style={styles.input}
-						maxLength={1}
-						keyboardType={"numeric"}
-						textAlign={"center"}
-						selectTextOnFocus={true}
-						selectionColor={"rgb(146, 99, 230)"}
-						onChangeText={(text => {password.current[1] = text; checkIfDone(); if(text !='') input2.current.focus(); else input0.current.focus()})}
-					/>
-				</View>
-				<View style={[styles.inputContainer, flag? styles.InvalidInput : styles.ValidInput]}>
-					<TextInput
-						ref={input2}
-						style={styles.input}
-						maxLength={1}
-						keyboardType={"numeric"}
-						textAlign={"center"}
-						selectTextOnFocus={true}
-						selectionColor={"rgb(146, 99, 230)"}
-						onChangeText={(text => {password.current[2] = text; checkIfDone(); if(text !='') input3.current.focus(); else input1.current.focus()})}
-					/>
-				</View>
-				<View style={[styles.inputContainer, flag? styles.InvalidInput : styles.ValidInput, { marginRight: 25 }]}>
-					<TextInput
-						ref={input3}
-						style={styles.input}
-						maxLength={1}
-						keyboardType={"numeric"}
-						textAlign={"center"}
-						selectTextOnFocus={true}
-						selectionColor={"rgb(146, 99, 230)"}
-						onChangeText={(text => {password.current[3] = text; checkIfDone(); if(text !='') input3.current.blur(); else input2.current.focus()})}
-					/>
-				</View>
-			</View>
-
-			{flag && 
-				<View style={{top: 160, left: 35}}>
-					<Text style={{color: "#FF4646", fontSize: 14, letterSpacing: 0.3}}>Bu mail adresi geçersiz.</Text>
-				</View>
-
-			}
-
-			<TouchableOpacity style={styles.button} disabled={!isAllEntered} onPress={handleButton}>
-				{isAllEntered? 
-				<LinearGradient
-				colors={["#4136F1", "#8743FF"]}
-				end={{ x: 0.5, y: 0.5 }}
-				locations={[0, 1]}
-				style={{
-					height: "100%",
-					width: "100%",
-						borderRadius: 8,
-						justifyContent: "center",
-						alignItems: "center",
-					}}
-					>
-					<Text style={styles.buttonText}>Doğrula</Text>
-				</LinearGradient>
-				:
-				<Text style={styles.buttonText}>Doğrula</Text>
-				}
-			</TouchableOpacity>
-			<TouchableOpacity style={{ top: 220, alignSelf: "center" }}>
-				<Text style={{ color: "#6B46D2", letterSpacing: 0.3, fontSize: 16, fontWeight: "bold" }}>
-					Tekrar Gönder
-				</Text>
-			</TouchableOpacity>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
-	Container: {
-		height: "100%",
-		width: "100%",
-		backgroundColor: "#ECECEC",
+	maskedViewStyle: {
+		position: "relative",
+		alignItems: "flex-start",
 	},
-	inputContainer: {
-		flex: 1,
-		marginHorizontal: 10,
-		width: 80,
+	inputBox: {
+		width: 70,
 		height: 70,
 		backgroundColor: "#F8F8F8",
 		borderRadius: 8,
-		top: 150,
 		justifyContent: "center",
-	},
-	ValidInput: {
-		backgroundColor: "#F8F8F8",
-	},
-	InvalidInput: {
-		backgroundColor: "#F9EAEC",
-		borderColor: '#FF4646',
-		borderWidth: 1.5, 
-	},
-	input: {
-		fontSize: 60,
-	},
-
-	button: {
-		backgroundColor: "#B6B6B6",
-		position: "relative",
-		width: 327,
-		height: 56,
-		top: 200,
-		alignItems: "center",
-		justifyContent: "center",
-		borderRadius: 8,
-		shadowColor: "rgba(58, 41, 106, 0.2)",
-		shadowOffset: { width: 0, height: 10 },
-		shadowRadius: 20,
-		alignSelf: "center",
-	},
-	buttonText: {
-		position: "relative",
-		color: "#FFFFFF",
-		fontStyle: "normal",
-		fontWeight: "500",
-		fontSize: 16,
-		textAlign: "center",
-		letterSpacing: 1,
 	},
 	text: {
 		color: "#525A64",

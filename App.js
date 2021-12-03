@@ -4,12 +4,12 @@ import { StyleSheet, Text, View } from "react-native";
 import Login from "./Pages/Login";
 import ForgotPassword from "./Pages/ForgotPassword";
 import Verification from "./Pages/Verification";
-import Temp from "./Pages/tempPage";
 
 export default function App() {
 	return (
 		<View>
-			<Verification />
+			<StatusBar style={"auto"} />
+			<Login /> 
 		</View>
 	);
 }

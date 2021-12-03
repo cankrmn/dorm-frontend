@@ -3,14 +3,15 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Animated } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
-import {MaskedView} from "@react-native-masked-view/masked-view";
+import MaskedView from "@react-native-masked-view/masked-view";
+import commonStyles from "../styles/styles"
 
 export default function ForgotPassword() {
 	const [email, onChangeEmail] = React.useState("");
 	const [flag, onChangeFlag] = React.useState(false);
 
 	const HandleButton = () => {
-		if(email == 'a') {
+		if (email == 'a') {
 			onChangeFlag(true);
 		}
 		else {
@@ -19,141 +20,108 @@ export default function ForgotPassword() {
 	}
 
 	return (
-		<View style={styles.Container}>
-			<TouchableOpacity
-				style={{ position: "absolute", top: 60, left: 35, alignSelf: "flex-start" }}
-			>
-				<Ionicons name="arrow-back-outline" size={32} color="#B6B6B6" />
-			</TouchableOpacity>
-			<MaskedView
-				style={{ top: 110, left: 36, height: 42 }}
-				maskElement={
-					<Text
-						style={{
-							alignSelf: "flex-start",
-							fontWeight: "bold",
-							fontSize: 36,
-						}}
-					>
-						Olur öyle
-					</Text>
-				}
-			>
-				<LinearGradient
-					colors={["#4136F1", "#8743FF"]}
-					end={{ x: 0.5, y: 0.5 }}
-					locations={[0, 1]}
-					style={{ height: 42, width: 130 }}
-				/>
-			</MaskedView>
-
-			<View style={{ top: 115, left: 40 }}>
-				<Text style={styles.text}>Hangimiz şifremizi unutmadık ki!</Text>
-				<Text style={styles.text}>
-					Hiç sorun değil, sana mail atacağımız{"\n"}doğrulamaya tıklaman yeterli.
-				</Text>
+		<View style={commonStyles.Container}>
+			<View style={commonStyles.Header}>
+				<TouchableOpacity style={{ left: 35 }}>
+					<Ionicons name="arrow-back-outline" size={32} color="#B6B6B6" />
+				</TouchableOpacity>
 			</View>
-			<View style={[styles.inputContainer, flag? styles.InvalidInput : styles.ValidInput]}>
-				<TextInput
-					style={styles.input}
-					onChangeText={onChangeEmail}
-					value={email}
-					keyboardType="email-address"
-					placeholder={"Üniversite Mail Adresin"}
-					//onFocus={handleFocus}
-				/>
-			</View>
-			{flag && 
-				<View style={{top: 175, left: 50}}>
-					<Text style={{color: "#FF4646", fontSize: 14, letterSpacing: 0.3}}>Bu mail adresi geçersiz.</Text>
-				</View>
-
-			}
-			<TouchableOpacity style={[styles.button, flag? {top: 210}:{top: 190}]} onPress={HandleButton}>
-			{!(email == "") ?
+			<View style={commonStyles.innerContainer}>
+				<MaskedView
+					style={styles.maskedViewStyle}
+					maskElement={
+						<Text
+							style={{
+								fontWeight: "bold",
+								fontSize: 30,
+							}}
+						>
+							Olur öyle
+						</Text>
+					}
+				>
 					<LinearGradient
 						colors={["#4136F1", "#8743FF"]}
-						end={{ x: 0.5, y: 0.5 }}
+						start={{ x: 0, y: 0 }}
+						end={{ x: 1, y: 1 }}
 						locations={[0, 1]}
-						style={{
-							height: "100%",
-							width: "100%",
-							borderRadius: 8,
-							justifyContent: "center",
-							alignItems: "center",
-						}}
 					>
-						<Text style={styles.buttonText}>Doğrulama Gönder</Text>
-					</LinearGradient> 
-					:
-					<Text style={styles.buttonText}>Doğrulama Gönder</Text>
-				}
-			</TouchableOpacity>
+						<Text
+							style={{
+								opacity: 0,
+								fontWeight: "bold",
+								fontSize: 30,
+							}}
+						>
+							Olur öyle
+						</Text>
+					</LinearGradient>
+				</MaskedView>
 
-			<View style={[{ alignSelf: "center", flexDirection: "row"}, flag? {top:230} : {top:210}]}>
-				<Text style={{ color: "#4A4A4A", letterSpacing: 0.3, fontSize: 15 }}>
-					Mailine ulaşamıyor musun?
-				</Text>
-				<TouchableOpacity style={{ left: 5 }}>
-					<Text style={{ color: "#6B46D2", fontWeight: "bold", letterSpacing: 0.3, fontSize: 15 }}>
-						Bize Ulaş
+				<View style={{ position: "relative", marginTop: 10 }}>
+					<Text style={styles.text}>Hangimiz şifremizi unutmadık ki!</Text>
+					<Text style={styles.text}>
+						Hiç sorun değil, sana mail atacağımız{"\n"}doğrulamaya tıklaman yeterli.
 					</Text>
+				</View>
+
+				<View style={[commonStyles.inputContainer, { marginTop: 30 }, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+					<TextInput
+						style={commonStyles.input}
+						onChangeText={onChangeEmail}
+						value={email}
+						keyboardType="email-address"
+						placeholder={"Üniversite Mail Adresin"}
+					//onFocus={handleFocus}
+					/>
+				</View>
+				{flag &&
+					<View style={{ marginTop: 8}}>
+						<Text style={{ color: "#FF4646", fontSize: 14, letterSpacing: 0.3 }}>Bu mail adresi geçersiz.</Text>
+					</View>
+
+				}
+				<TouchableOpacity style={[commonStyles.button, { marginTop: 30 }]} onPress={HandleButton}>
+					{!(email == "") ?
+						<LinearGradient
+							colors={["#4136F1", "#8743FF"]}
+							start={{ x: 0, y: 0 }}
+							end={{ x: 1, y: 1 }}
+							locations={[0, 1]}
+							style={{
+								height: "100%",
+								width: "100%",
+								borderRadius: 8,
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<Text style={commonStyles.buttonText}>Doğrulama Gönder</Text>
+						</LinearGradient>
+						:
+						<Text style={commonStyles.buttonText}>Doğrulama Gönder</Text>
+					}
 				</TouchableOpacity>
+
+				<View style={{ alignSelf: "center", flexDirection: "row", marginTop: 15 }}>
+					<Text style={{ color: "#4A4A4A", letterSpacing: 0.3, fontSize: 15 }}>
+						Mailine ulaşamıyor musun?
+					</Text>
+					<TouchableOpacity style={{ left: 5 }}>
+						<Text style={{ color: "#6B46D2", fontWeight: "bold", letterSpacing: 0.3, fontSize: 15 }}>
+							Bize Ulaş
+						</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
-	Container: {
-		height: "100%",
-		width: "100%",
-		backgroundColor: "#ECECEC",
-	},
-	inputContainer: {
+	maskedViewStyle: {
 		position: "relative",
-		width: 327,
-		height: 56,
-		borderRadius: 8,
-		top: 170,
-		alignSelf: "center",
-	},
-	ValidInput: {
-		backgroundColor: "#F8F8F8",
-	},
-	InvalidInput: {
-		backgroundColor: "#F9EAEC",
-		borderColor: '#FF4646',
-		borderWidth: 1.5, 
-	},
-	input: {
-		width: 327,
-		height: 56,
-		left: 15,
-		borderRadius: 8,
-	},
-
-	button: {
-		backgroundColor: "#B6B6B6",
-		position: "relative",
-		width: 327,
-		height: 56,
-		alignItems: "center",
-		justifyContent: "center",
-		borderRadius: 8,
-		shadowColor: "rgba(58, 41, 106, 0.2)",
-		shadowOffset: { width: 0, height: 10 },
-		shadowRadius: 20,
-		alignSelf: "center",
-	},
-	buttonText: {
-		position: "relative",
-		color: "#FFFFFF",
-		fontStyle: "normal",
-		fontWeight: "500",
-		fontSize: 16,
-		textAlign: "center",
-		letterSpacing: 1,
+		alignItems: "flex-start",
 	},
 	text: {
 		color: "#525A64",
