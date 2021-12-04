@@ -13,28 +13,39 @@ export default function Login() {
 	const [flag, onChangeFlag] = React.useState(false);
 	const [passwordShown, onChangePS] = React.useState(false)
 
-	const passwordRef = React.createRef();
+	const animRef1 = React.useRef(new Animated.Value(0)).current;
+	const animRef2 = React.useRef(new Animated.Value(0)).current;
 
 	//prettier-ignore
 	let [fontsLoaded] = useFonts({ 'Poppins': require("../assets/Fonts/Poppins/Poppins-Medium.ttf") });
 
-	let handleFocus = () => {
-		Animated.timing(this.position, {
+
+	const handleFocus = (ref) => {
+		Animated.timing(ref, {
+			useNativeDriver: false,
 			toValue: 1,
 			duration: 150,
 		}).start();
 	};
 
+	const handleBlur = (ref) => {
+		Animated.timing(ref, {
+			useNativeDriver: false,
+			toValue: 0,
+			duration: 150,
+		}).start();
+	}
+
 	const handleLogin = () => {
 		if(email == 'a') {
 			onChangeFlag(true)
-			passwordRef.current.clear()
-			onChangePassword("")
+			// onChangePassword("")
 		}
 		else {
 			onChangeFlag(false)
 		}
 	}
+
 
 	return (
 		<View style={commonStyles.Container}>
@@ -45,26 +56,30 @@ export default function Login() {
 			</View>
 			<View style={[commonStyles.innerContainer, {marginTop: 60}]}>
 				<View style={[commonStyles.inputContainer, flag? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+					<Animated.Text style={[styles.placeHolder, {transform: [{translateY: animRef1.interpolate({ inputRange: [0,1], outputRange: [0, -20]})}], fontSize: animRef1.interpolate({ inputRange: [0,1], outputRange: [14, 11]})}]}>Üniversite Mail Adresin</ Animated.Text>
 					<TextInput
 						style={commonStyles.input}
 						onChangeText={onChangeEmail}
 						value={email}
 						keyboardType="email-address"
-						placeholder={"Üniversite Mail Adresin"}
-						//onFocus={handleFocus}
+						// placeholder={"Üniversite Mail Adresin"}
+						onFocus={() => {handleFocus(animRef1)}}
+						onBlur={() => {if(email == "") handleBlur(animRef1)}}
 					/>
 				</View>
-				<View style={[commonStyles.inputContainer, { marginTop: 20, alignItems: "center", flexDirection: "row" }, flag? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+				<View style={[commonStyles.inputContainer, { marginTop: 20, justifyContent: "center"}, flag? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+					<Animated.Text style={[styles.placeHolder, {transform: [{translateY: animRef2.interpolate({ inputRange: [0,1], outputRange: [0, -20]})}], fontSize: animRef2.interpolate({ inputRange: [0,1], outputRange: [14, 11]})}]}>Şifren</ Animated.Text>
 					<TextInput
-						ref={passwordRef}
 						style={[commonStyles.input]}
 						onChangeText={onChangePassword}
 						value={password}
 						secureTextEntry={!passwordShown}
-						placeholder={"Şifren"}
+						// placeholder={"Şifren"}
+						onFocus={() => {handleFocus(animRef2)}}
+						onBlur={() => {if(password == "") handleBlur(animRef2)}}
 					/>
-					<TouchableOpacity style={{right: 40}} onPress={() => {onChangePS(!passwordShown)}}>
-						{passwordShown? 
+					<TouchableOpacity style={{alignSelf: "flex-end", position: "absolute", right: 15}} onPress={() => {onChangePS(!passwordShown)}}>
+						{passwordShown?
 							<Ionicons  name="eye" size={27} color="#B6B6B6" />
 							:
 							<Ionicons  name="eye-off" size={27} color="#B6B6B6" />
@@ -75,7 +90,7 @@ export default function Login() {
 				<View style={{marginTop: 8, left: 2, position: "relative"}}>
 					<Text style={{color: "#FF4646", fontSize: 14, letterSpacing: 0.3}}>Bir yanlışlık olmalı. Lütfen tekrar dene.</Text>
 				</View>}
-				
+
 				<TouchableOpacity style={{position: "relative", left: 2, marginTop: 12}}>
 					<Text style={{ color: "#6B46D2", letterSpacing: 0.3, fontSize: 15, fontWeight: "600" }}>
 						Şifreni mi Unuttun?
@@ -98,7 +113,7 @@ export default function Login() {
 							}}
 						>
 							<Text style={commonStyles.buttonText}>Giriş Yap</Text>
-						</LinearGradient> 
+						</LinearGradient>
 						:
 						<Text style={commonStyles.buttonText}>Giriş Yap</Text>
 					}
@@ -116,5 +131,11 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-	
+	placeHolder: {
+		position:"absolute",
+		alignSelf: "flex-start",
+		color: "#B6B6B6",
+		marginLeft: 15,
+		fontSize: 14
+	},
 });

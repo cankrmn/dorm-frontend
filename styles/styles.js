@@ -24,6 +24,7 @@ export default styles = StyleSheet.create({
 		height: 56,
 		borderRadius: 8,
 		alignSelf: "center",
+		justifyContent: "center",
 	},
 	ValidInput: {
 		backgroundColor: "#F8F8F8",

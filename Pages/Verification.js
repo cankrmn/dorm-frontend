@@ -96,7 +96,7 @@ export default function Verification() {
 					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput, {}]}>
 						<TextInput
 							ref={input0}
-							style={commonStyles.input}
+							style={styles.input}
 							maxLength={1}
 							keyboardType={"numeric"}
 							textAlign={"center"}
@@ -110,7 +110,7 @@ export default function Verification() {
 					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
 						<TextInput
 							ref={input1}
-							style={commonStyles.input}
+							style={styles.input}
 							maxLength={1}
 							keyboardType={"numeric"}
 							textAlign={"center"}
@@ -122,7 +122,7 @@ export default function Verification() {
 					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
 						<TextInput
 							ref={input2}
-							style={commonStyles.input}
+							style={styles.input}
 							maxLength={1}
 							keyboardType={"numeric"}
 							textAlign={"center"}
@@ -134,7 +134,7 @@ export default function Verification() {
 					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
 						<TextInput
 							ref={input3}
-							style={commonStyles.input}
+							style={styles.input}
 							maxLength={1}
 							keyboardType={"numeric"}
 							textAlign={"center"}
@@ -174,7 +174,7 @@ export default function Verification() {
 						<Text style={commonStyles.buttonText}>Doğrula</Text>
 					}
 				</TouchableOpacity>
-				<TouchableOpacity style={{ marginTop: 8, alignSelf: "center" }}>
+				<TouchableOpacity style={{ marginTop: 16, alignSelf: "center" }}>
 					<Text style={{ color: "#6B46D2", letterSpacing: 0.3, fontSize: 16, fontWeight: "bold" }}>
 						Tekrar Gönder
 					</Text>
@@ -195,6 +195,12 @@ const styles = StyleSheet.create({
 		backgroundColor: "#F8F8F8",
 		borderRadius: 8,
 		justifyContent: "center",
+	},
+	input: {
+		width: 70,
+		height: 70,
+		fontSize: 30,
+		borderRadius: 8,
 	},
 	text: {
 		color: "#525A64",

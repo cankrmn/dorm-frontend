@@ -10,6 +10,9 @@ export default function ForgotPassword() {
 	const [email, onChangeEmail] = React.useState("");
 	const [flag, onChangeFlag] = React.useState(false);
 
+	const animRef = React.useRef(new Animated.Value(0)).current;
+
+
 	const HandleButton = () => {
 		if (email == 'a') {
 			onChangeFlag(true);
@@ -17,6 +20,22 @@ export default function ForgotPassword() {
 		else {
 			onChangeFlag(false);
 		}
+	}
+
+	const handleFocus = (ref) => {
+		Animated.timing(ref, {
+			useNativeDriver: false,
+			toValue: 1,
+			duration: 150,
+		}).start();
+	};
+
+	const handleBlur = (ref) => {
+		Animated.timing(ref, {
+			useNativeDriver: false,
+			toValue: 0,
+			duration: 150,
+		}).start();
 	}
 
 	return (
@@ -66,13 +85,15 @@ export default function ForgotPassword() {
 				</View>
 
 				<View style={[commonStyles.inputContainer, { marginTop: 30 }, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+					<Animated.Text style={[styles.placeHolder, {transform: [{translateY: animRef.interpolate({ inputRange: [0,1], outputRange: [0, -20]})}], fontSize: animRef.interpolate({ inputRange: [0,1], outputRange: [14, 11]})}]}>Üniversite Mail Adresin</ Animated.Text>
 					<TextInput
 						style={commonStyles.input}
 						onChangeText={onChangeEmail}
 						value={email}
 						keyboardType="email-address"
-						placeholder={"Üniversite Mail Adresin"}
-					//onFocus={handleFocus}
+						// placeholder={"Üniversite Mail Adresin"}
+						onFocus={() => {handleFocus(animRef)}}
+						onBlur={() => {if(email == "") handleBlur(animRef)}}
 					/>
 				</View>
 				{flag &&
@@ -128,5 +149,12 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		alignContent: "flex-start",
 		letterSpacing: 0.3,
+	},
+	placeHolder: {
+		position:"absolute",
+		alignSelf: "flex-start",
+		color: "#B6B6B6",
+		marginLeft: 15,
+		fontSize: 14
 	},
 });

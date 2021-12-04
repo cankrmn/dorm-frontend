@@ -9,7 +9,7 @@ export default function App() {
 	return (
 		<View>
 			<StatusBar style={"auto"} />
-			<Login /> 
+			<Login />
 		</View>
 	);
 }
