@@ -125,7 +125,11 @@ export default function ForgotPassword() {
 						</Text>
 					</View>
 				)}
-				<TouchableOpacity style={[commonStyles.button, { marginTop: 30 }]} onPress={HandleButton}>
+				<TouchableOpacity
+					style={[commonStyles.button, { marginTop: 30 }]}
+					disabled={email == ""}
+					onPress={HandleButton}
+				>
 					{!(email == "") ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
