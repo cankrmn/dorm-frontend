@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Animated } from "r
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import MaskedView from "@react-native-masked-view/masked-view";
-import commonStyles from "../styles/styles"
+import commonStyles from "../visualComponents/styles";
 
 export default function Verification() {
 	let email = "tcan@sabanciuniv.edu";
@@ -18,7 +18,6 @@ export default function Verification() {
 	const input2 = React.createRef();
 	const input3 = React.createRef();
 
-
 	const handleButton = () => {
 		input0.current.clear();
 		input1.current.clear();
@@ -28,24 +27,22 @@ export default function Verification() {
 		input0.current.focus();
 
 		if (password.current[0] == 0) {
-			onChangeFlag(true)
-		}
-		else {
-			onChangeFlag(false)
+			onChangeFlag(true);
+		} else {
+			onChangeFlag(false);
 		}
 
 		password.current = [-1, -1, -1, -1];
-		onChangeInput(false)
-	}
+		onChangeInput(false);
+	};
 
 	const checkIfDone = () => {
 		if (!(password.current.includes(-1) || password.current.includes(""))) {
-			onChangeInput(true)
+			onChangeInput(true);
+		} else {
+			onChangeInput(false);
 		}
-		else {
-			onChangeInput(false)
-		}
-	}
+	};
 
 	return (
 		<View style={commonStyles.Container}>
@@ -61,13 +58,7 @@ export default function Verification() {
 			<View style={commonStyles.innerContainer}>
 				<MaskedView
 					style={styles.maskedViewStyle}
-					maskElement={
-						<Text
-							style={{ fontWeight: "bold", fontSize: 30, }}
-						>
-							Doğrulama Kodun
-						</Text>
-					}
+					maskElement={<Text style={{ fontWeight: "bold", fontSize: 30 }}>Doğrulama Kodun</Text>}
 				>
 					<LinearGradient
 						colors={["#4136F1", "#8743FF"]}
@@ -77,7 +68,9 @@ export default function Verification() {
 					>
 						<Text
 							style={{
-								opacity: 0, fontWeight: "bold", fontSize: 30,
+								opacity: 0,
+								fontWeight: "bold",
+								fontSize: 30,
 							}}
 						>
 							Doğrulama Kodun
@@ -85,7 +78,7 @@ export default function Verification() {
 					</LinearGradient>
 				</MaskedView>
 
-				<View style={{ marginTop: 10, }}>
+				<View style={{ marginTop: 10 }}>
 					<Text style={[styles.text, { fontWeight: "bold" }]}>{email}</Text>
 					<Text style={styles.text}>
 						mail adresine gönderdiğimiz doğrulama{"\n"}kodunu bizimle paylaş
@@ -93,7 +86,13 @@ export default function Verification() {
 				</View>
 
 				<View style={{ marginTop: 30, flexDirection: "row", justifyContent: "space-between" }}>
-					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput, {}]}>
+					<View
+						style={[
+							styles.inputBox,
+							flag ? commonStyles.InvalidInput : commonStyles.ValidInput,
+							{},
+						]}
+					>
 						<TextInput
 							ref={input0}
 							style={styles.input}
@@ -102,12 +101,17 @@ export default function Verification() {
 							textAlign={"center"}
 							selectTextOnFocus={true}
 							selectionColor={"rgb(146, 99, 230)"}
-							onChangeText={(text => { password.current[0] = text; checkIfDone(); if (text != '') input1.current.focus(); })}
-
+							onChangeText={(text) => {
+								password.current[0] = text;
+								checkIfDone();
+								if (text != "") input1.current.focus();
+							}}
 							autoFocus={true}
 						/>
 					</View>
-					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+					<View
+						style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}
+					>
 						<TextInput
 							ref={input1}
 							style={styles.input}
@@ -116,10 +120,17 @@ export default function Verification() {
 							textAlign={"center"}
 							selectTextOnFocus={true}
 							selectionColor={"rgb(146, 99, 230)"}
-							onChangeText={(text => { password.current[1] = text; checkIfDone(); if (text != '') input2.current.focus(); else input0.current.focus() })}
+							onChangeText={(text) => {
+								password.current[1] = text;
+								checkIfDone();
+								if (text != "") input2.current.focus();
+								else input0.current.focus();
+							}}
 						/>
 					</View>
-					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+					<View
+						style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}
+					>
 						<TextInput
 							ref={input2}
 							style={styles.input}
@@ -128,10 +139,17 @@ export default function Verification() {
 							textAlign={"center"}
 							selectTextOnFocus={true}
 							selectionColor={"rgb(146, 99, 230)"}
-							onChangeText={(text => { password.current[2] = text; checkIfDone(); if (text != '') input3.current.focus(); else input1.current.focus() })}
+							onChangeText={(text) => {
+								password.current[2] = text;
+								checkIfDone();
+								if (text != "") input3.current.focus();
+								else input1.current.focus();
+							}}
 						/>
 					</View>
-					<View style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
+					<View
+						style={[styles.inputBox, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}
+					>
 						<TextInput
 							ref={input3}
 							style={styles.input}
@@ -140,21 +158,35 @@ export default function Verification() {
 							textAlign={"center"}
 							selectTextOnFocus={true}
 							selectionColor={"rgb(146, 99, 230)"}
-							onChangeText={(text => { password.current[3] = text; checkIfDone(); if (text == '') input2.current.focus(); else input3.current.blur() })}
-							onChangeText={(text => { password.current[3] = text; checkIfDone(); if (text == '') input2.current.focus();})}
+							onChangeText={(text) => {
+								password.current[3] = text;
+								checkIfDone();
+								if (text == "") input2.current.focus();
+								else input3.current.blur();
+							}}
+							onChangeText={(text) => {
+								password.current[3] = text;
+								checkIfDone();
+								if (text == "") input2.current.focus();
+							}}
 						/>
 					</View>
 				</View>
 
-				{flag &&
+				{flag && (
 					<View style={{ marginTop: 10 }}>
-						<Text style={{ color: "#FF4646", fontSize: 14, letterSpacing: 0.3 }}>Bu mail adresi geçersiz.</Text>
+						<Text style={{ color: "#FF4646", fontSize: 14, letterSpacing: 0.3 }}>
+							Bu doğrulama kodu geçersiz.
+						</Text>
 					</View>
+				)}
 
-				}
-
-				<TouchableOpacity style={[commonStyles.button, { marginTop: 30 }]} disabled={!isAllEntered} onPress={handleButton}>
-					{isAllEntered ?
+				<TouchableOpacity
+					style={[commonStyles.button, { position: "absolute", marginTop: 260 }]}
+					disabled={!isAllEntered}
+					onPress={handleButton}
+				>
+					{isAllEntered ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -170,11 +202,11 @@ export default function Verification() {
 						>
 							<Text style={commonStyles.buttonText}>Doğrula</Text>
 						</LinearGradient>
-						:
+					) : (
 						<Text style={commonStyles.buttonText}>Doğrula</Text>
-					}
+					)}
 				</TouchableOpacity>
-				<TouchableOpacity style={{ marginTop: 16, alignSelf: "center" }}>
+				<TouchableOpacity style={{ marginTop: 335, position: "absolute", alignSelf: "center" }}>
 					<Text style={{ color: "#6B46D2", letterSpacing: 0.3, fontSize: 16, fontWeight: "bold" }}>
 						Tekrar Gönder
 					</Text>

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Animated } from "r
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import MaskedView from "@react-native-masked-view/masked-view";
-import commonStyles from "../styles/styles"
+import commonStyles from "../visualComponents/styles";
 
 export default function ForgotPassword() {
 	const [email, onChangeEmail] = React.useState("");
@@ -12,15 +12,13 @@ export default function ForgotPassword() {
 
 	const animRef = React.useRef(new Animated.Value(0)).current;
 
-
 	const HandleButton = () => {
-		if (email == 'a') {
+		if (email == "a") {
 			onChangeFlag(true);
-		}
-		else {
+		} else {
 			onChangeFlag(false);
 		}
-	}
+	};
 
 	const handleFocus = (ref) => {
 		Animated.timing(ref, {
@@ -36,7 +34,7 @@ export default function ForgotPassword() {
 			toValue: 0,
 			duration: 150,
 		}).start();
-	}
+	};
 
 	return (
 		<View style={commonStyles.Container}>
@@ -84,26 +82,51 @@ export default function ForgotPassword() {
 					</Text>
 				</View>
 
-				<View style={[commonStyles.inputContainer, { marginTop: 30 }, flag ? commonStyles.InvalidInput : commonStyles.ValidInput]}>
-					<Animated.Text style={[styles.placeHolder, {transform: [{translateY: animRef.interpolate({ inputRange: [0,1], outputRange: [0, -20]})}], fontSize: animRef.interpolate({ inputRange: [0,1], outputRange: [14, 11]})}]}>Üniversite Mail Adresin</ Animated.Text>
+				<View
+					style={[
+						commonStyles.inputContainer,
+						{ marginTop: 30 },
+						flag ? commonStyles.InvalidInput : commonStyles.ValidInput,
+					]}
+				>
+					<Animated.Text
+						style={[
+							styles.placeHolder,
+							{
+								transform: [
+									{
+										translateY: animRef.interpolate({ inputRange: [0, 1], outputRange: [0, -20] }),
+									},
+								],
+								fontSize: animRef.interpolate({ inputRange: [0, 1], outputRange: [14, 11] }),
+							},
+						]}
+					>
+						Üniversite Mail Adresin
+					</Animated.Text>
 					<TextInput
 						style={commonStyles.input}
 						onChangeText={onChangeEmail}
 						value={email}
 						keyboardType="email-address"
 						// placeholder={"Üniversite Mail Adresin"}
-						onFocus={() => {handleFocus(animRef)}}
-						onBlur={() => {if(email == "") handleBlur(animRef)}}
+						onFocus={() => {
+							handleFocus(animRef);
+						}}
+						onBlur={() => {
+							if (email == "") handleBlur(animRef);
+						}}
 					/>
 				</View>
-				{flag &&
-					<View style={{ marginTop: 8}}>
-						<Text style={{ color: "#FF4646", fontSize: 14, letterSpacing: 0.3 }}>Bu mail adresi geçersiz.</Text>
+				{flag && (
+					<View style={{ marginTop: 8 }}>
+						<Text style={{ color: "#FF4646", fontSize: 14, letterSpacing: 0.3 }}>
+							Bu mail adresi geçersiz.
+						</Text>
 					</View>
-
-				}
+				)}
 				<TouchableOpacity style={[commonStyles.button, { marginTop: 30 }]} onPress={HandleButton}>
-					{!(email == "") ?
+					{!(email == "") ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -119,9 +142,9 @@ export default function ForgotPassword() {
 						>
 							<Text style={commonStyles.buttonText}>Doğrulama Gönder</Text>
 						</LinearGradient>
-						:
+					) : (
 						<Text style={commonStyles.buttonText}>Doğrulama Gönder</Text>
-					}
+					)}
 				</TouchableOpacity>
 
 				<View style={{ alignSelf: "center", flexDirection: "row", marginTop: 15 }}>
@@ -129,7 +152,9 @@ export default function ForgotPassword() {
 						Mailine ulaşamıyor musun?
 					</Text>
 					<TouchableOpacity style={{ left: 5 }}>
-						<Text style={{ color: "#6B46D2", fontWeight: "bold", letterSpacing: 0.3, fontSize: 15 }}>
+						<Text
+							style={{ color: "#6B46D2", fontWeight: "bold", letterSpacing: 0.3, fontSize: 15 }}
+						>
 							Bize Ulaş
 						</Text>
 					</TouchableOpacity>
@@ -151,10 +176,10 @@ const styles = StyleSheet.create({
 		letterSpacing: 0.3,
 	},
 	placeHolder: {
-		position:"absolute",
+		position: "absolute",
 		alignSelf: "flex-start",
 		color: "#B6B6B6",
 		marginLeft: 15,
-		fontSize: 14
+		fontSize: 14,
 	},
 });
