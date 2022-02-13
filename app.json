@@ -27,6 +27,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+			[
+				"expo-image-picker",
+				{
+					"photosPermission": "Allow Dorm to access your photos.",
+					"isAccessMediaLocationEnabled": "true"
+				}
+			]
+		]
   }
 }
