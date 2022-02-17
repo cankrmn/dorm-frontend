@@ -6,9 +6,24 @@ export const CustomModal = (props) => {
 	return (
 		<Modal
 			visible={props.visible}
-			transparent={props.transparent}
+			transparent={props.transparent || true}
 			onRequestClose={props.dismiss}
-			animationType={props.animationType}
+			animationType={props.animationType || "fade"}
+		>
+			<TouchableWithoutFeedback onPress={props.dismiss}>
+				<View style={[styles.modalOverlay, props.overlay]} />
+			</TouchableWithoutFeedback>
+			<View style={styles.modalContent}>{props.children}</View>
+		</Modal>
+	);
+};
+
+export const SwapModal = (props) => {
+	return (
+		<Modal
+			visible={props.visible}
+			transparent={props.transparent || true}
+			onRequestClose={props.dismiss}
 		>
 			<TouchableWithoutFeedback onPress={props.dismiss}>
 				<View style={[styles.modalOverlay, props.overlay]} />

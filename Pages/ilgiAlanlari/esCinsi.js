@@ -30,21 +30,18 @@ const EsCinsi = props => {
         kadinEntered ? (kadinInput(previousState => previousState)) : (kadinInput(previousState => !previousState))
         erkekEntered ? (erkekInput(previousState => !previousState)) : (erkekInput(previousState => previousState))
         herkesEntered ? (herkesInput(previousState => !previousState)) : (herkesInput(previousState => previousState))
-        beyanEtmeEntered ? (beyanEtmeInput(previousState => !previousState)) : (beyanEtmeInput(previousState => previousState))
     };
     
     const toggleErkek = () => {
         kadinEntered ? (kadinInput(previousState => !previousState)) : (kadinInput(previousState => previousState))
         erkekEntered ? (erkekInput(previousState => previousState)) : (erkekInput(previousState => !previousState))
         herkesEntered ? (herkesInput(previousState => !previousState)) : (herkesInput(previousState => previousState))
-        beyanEtmeEntered ? (beyanEtmeInput(previousState => !previousState)) : (beyanEtmeInput(previousState => previousState))
     };
 
     const toggleHerkes = () => {
         kadinEntered ? (kadinInput(previousState => !previousState)) : (kadinInput(previousState => previousState))
         erkekEntered ? (erkekInput(previousState => !previousState)) : (erkekInput(previousState => previousState))
         herkesEntered ? (herkesInput(previousState => previousState)) : (herkesInput(previousState => !previousState))
-        beyanEtmeEntered ? (beyanEtmeInput(previousState => !previousState)) : (beyanEtmeInput(previousState => previousState))
     };
 
 

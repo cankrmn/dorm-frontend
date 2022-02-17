@@ -18,57 +18,58 @@ const IlgiAlani = props => {
         props.navigation.navigate("Foto");
       };
     const goToNextPage = () => {
-        props.navigation.navigate("Gender");
+        props.navigation.navigate("FirstPage");
     };
 
 
     const spor = [
-        {key: 'Basketbol'},
-        {key: 'Fitness'},
-        {key: 'Voleybol'},
-        {key: 'Yoga'},
+        {key: '🏀Basketbol'},
+        {key: '🏋️Fitness'},
+        {key: '🏐Voleybol'},
+        {key: '🧘Yoga'},
+        {key: '🎾Tennis'} 
     ];
 
     const yaraticilik = [
-        {key: 'Müzik'},
-        {key: 'Dans'},
-        {key: 'Vlog'},
-        {key: 'Yazı'},
-        {key: 'Resim'},
+        {key: '🎸Müzik'},
+        {key: '💃Dans'},
+        {key: '📹Vlog'},
+        {key: '📝Yazı'},
+        {key: '🎨Resim'},
     ];
 
     const yemek = [
-        {key: 'Şarap'},
-        {key: 'Bira'},
-        {key: 'Viski'},
-        {key: 'Vegan'},
+        {key: '🍷Şarap'},
+        {key: '🍺Bira'},
+        {key: '🍸Kokteyl'},
+        {key: '🥦Vegan'},
 
     ];
 
     const film = [
-        {key: 'Süper Kahraman'},
-        {key: 'Korku'},
-        {key: 'Bilim Kurgu'},
+        {key: '🦸Süper Kahraman'},
+        {key: '🙀Korku'},
+        {key: '🧑‍🚀Bilim Kurgu'},
     ];
 
     const okumak = [
-        {key: 'Klasik'},
-        {key: 'Tarih'},
-        {key: 'Suç'},
-        {key: 'Fantastik'},
+        {key: '🖊️Klasik'},
+        {key: '🏺Tarih'},
+        {key: '🔪Suç'},
+        {key: '🧝‍♀️Fantastik'},
     ];
 
     const müzik = [
-        {key: 'Klasik'},
-        {key: 'Jazz'},
-        {key: 'Rock'},
-        {key: 'Country'},
+        {key: '🎹Klasik'},
+        {key: '🎷Jazz'},
+        {key: '🎸Rock'},
+        {key: '🪕Country'},
     ];
 
     const aktivizm = [
-        {key: 'Feminist'},
-        {key: 'LGBTQ+ destekçisi'},
-        {key: 'Çevrecilik'},
+        {key: '💁🏻‍♀️Feminist'},
+        {key: '🏳️‍🌈LGBTQ+ destekçisi'},
+        {key: '🌲Çevrecilik'},
     ];
 
     const ozellikler = [
@@ -114,6 +115,7 @@ const IlgiAlani = props => {
 					        name={"EventHeader"}
 					        style={[commonStyles.Header, { height: height * 0.05, marginTop: 20 }]}
 				        >
+
 					        <GradientText
 						        text={"Yaratıcılık"}
 						        style={{ fontSize: 20, fontWeight: "bold", letterSpacing: 1.2, marginLeft: 20 }}
@@ -175,6 +177,32 @@ const IlgiAlani = props => {
                             <FlatList data={müzik} renderItem={({item} ) => <Item item={item} /> } horizontal = {true} />
 				        </View>
 
+                        <View
+					        name={"EventHeader"}
+					        style={[commonStyles.Header, { height: height * 0.05, marginTop: 20 }]}
+				        >
+					        <GradientText
+						        text={"Değerler ve Aktivizm"}
+						        style={{ fontSize: 20, fontWeight: "bold", letterSpacing: 1.2, marginLeft: 20 }}
+					        />
+				        </View>
+                        <View style={{ flexDirection: "row", marginTop: 10 }}>
+                            <FlatList data={aktivizm} renderItem={({item} ) => <Item item={item} /> } horizontal = {true} />
+				        </View>
+
+                        <View
+					        name={"EventHeader"}
+					        style={[commonStyles.Header, { height: height * 0.05, marginTop: 20 }]}
+				        >
+					        <GradientText
+						        text={"Değerler"}
+						        style={{ fontSize: 20, fontWeight: "bold", letterSpacing: 1.2, marginLeft: 20 }}
+					        />
+				        </View>
+                        <View style={{ flexDirection: "row", marginTop: 10 }}>
+                            <FlatList data={ozellikler} renderItem={({item} ) => <Item item={item} /> } horizontal = {true} />
+				        </View>
+
 
 
 
@@ -198,7 +226,6 @@ const Item = ({item}) => {
 					onPress={() => {toggleActivity()}}
 					style={{
 						marginHorizontal: width / 50,
-						width: width / 4,
 						height: width / 8,
 						borderRadius: width / 16,
 						overflow: "hidden",
@@ -211,7 +238,7 @@ const Item = ({item}) => {
 									alignItems: "center",
     							}}
 						>
-								<Text style={{ color: colors.white }}>{item.key}</Text>
+								<Text style={{color: colors.white }}>   {item.key}   </Text>
 						</Gradient>
 					) : (
 						<View
@@ -222,7 +249,7 @@ const Item = ({item}) => {
 				    			alignItems: "center",
 							}}
 						>
-							<Text style={{ color: colors.black }}>{item.key}</Text>
+							<Text style={{ color: colors.black }}>   {item.key}   </Text>
 						</View>
 					)}
 			</Pressable>

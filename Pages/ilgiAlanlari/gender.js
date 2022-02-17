@@ -13,8 +13,8 @@ const { width, height } = Dimensions.get("window");
 
 const Gender = props => {
     const goToNextPage = () => {
-        //props.navigation.navigate("Beklenti");
-        props.navigation.navigate("IlgiAlani");
+        props.navigation.navigate("Beklenti");
+        //props.navigation.navigate("IlgiAlani");
 
         
     };
