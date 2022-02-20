@@ -18,42 +18,11 @@ const Gender = props => {
 
         
     };
-
-    const [kadinEntered, kadinInput] = useState(false);
-    const [erkekEntered, erkekInput] = useState(false);
-    const [nonBinaryEntered, nonBinaryInput] = useState(false);
-    const [beyanEtmeEntered, beyanEtmeInput] = useState(false);
+	
+	const [gender, setGender] = React.useState([0, 0, 0, 0]);
+    
 
     const [isEnabled, setIsEnabled] = useState(true);
-    
-    const toggleKadin = () => {
-        kadinEntered ? (kadinInput(previousState => previousState)) : (kadinInput(previousState => !previousState))
-        erkekEntered ? (erkekInput(previousState => !previousState)) : (erkekInput(previousState => previousState))
-        nonBinaryEntered ? (nonBinaryInput(previousState => !previousState)) : (nonBinaryInput(previousState => previousState))
-        beyanEtmeEntered ? (beyanEtmeInput(previousState => !previousState)) : (beyanEtmeInput(previousState => previousState))
-    };
-    
-    const toggleErkek = () => {
-        kadinEntered ? (kadinInput(previousState => !previousState)) : (kadinInput(previousState => previousState))
-        erkekEntered ? (erkekInput(previousState => previousState)) : (erkekInput(previousState => !previousState))
-        nonBinaryEntered ? (nonBinaryInput(previousState => !previousState)) : (nonBinaryInput(previousState => previousState))
-        beyanEtmeEntered ? (beyanEtmeInput(previousState => !previousState)) : (beyanEtmeInput(previousState => previousState))
-    };
-
-    const toggleNonBinary = () => {
-        kadinEntered ? (kadinInput(previousState => !previousState)) : (kadinInput(previousState => previousState))
-        erkekEntered ? (erkekInput(previousState => !previousState)) : (erkekInput(previousState => previousState))
-        nonBinaryEntered ? (nonBinaryInput(previousState => previousState)) : (nonBinaryInput(previousState => !previousState))
-        beyanEtmeEntered ? (beyanEtmeInput(previousState => !previousState)) : (beyanEtmeInput(previousState => previousState))
-    };
-
-    const toggleBeyanEtme = () => {
-        kadinEntered ? (kadinInput(previousState => !previousState)) : (kadinInput(previousState => previousState))
-        erkekEntered ? (erkekInput(previousState => !previousState)) : (erkekInput(previousState => previousState))
-        nonBinaryEntered ? (nonBinaryInput(previousState => !previousState)) : (nonBinaryInput(previousState => previousState))
-        beyanEtmeEntered ? (beyanEtmeInput(previousState => previousState)) : (beyanEtmeInput(previousState => !previousState))
-    };
-
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
    
@@ -89,9 +58,9 @@ const Gender = props => {
                 </MaskedView>
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:80}]}
-					onPress={toggleKadin}
+					onPress={() => { setGender([1, 0, 0, 0]); }}
 				>
-					{kadinEntered ? (
+					{gender[0] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -131,9 +100,9 @@ const Gender = props => {
                 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", margin: 160}]}
-					onPress={toggleErkek}
+					onPress={() => { setGender([0, 1, 0, 0]); }}
 				>
-					{erkekEntered ? (
+					{gender[1] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -173,9 +142,9 @@ const Gender = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:240}]}
-					onPress={toggleNonBinary}
+					onPress={() => { setGender([0, 0, 1, 0]); }}
 				>
-					{nonBinaryEntered ? (
+					{gender[2] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -215,9 +184,9 @@ const Gender = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:320 }]}
-					onPress={toggleBeyanEtme}
+					onPress={() => { setGender([0, 0, 0, 1]); }}
 				>
-					{beyanEtmeEntered ? (
+					{gender[3] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}

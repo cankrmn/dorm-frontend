@@ -20,69 +20,7 @@ const Beklenti = props => {
         props.navigation.navigate("EsCinsi");
     };
 
-
-    const [takilmakEntered, takilmakInput] = useState(false);
-    const [kisaIliskiEntered, kisaIliskiInput] = useState(false);
-    const [uzunIliskiEntered, uzunIliskiInput] = useState(false);
-    const [yeniArkadasEntered, yeniArkadasInput] = useState(false);
-    const [eventDateEntered, eventDateInput] = useState(false);
-    const [bilmiyorumEntered, bilmiyorumInput] = useState(false);
-
-    
-    const toggleTakilmak = () => {
-        takilmakEntered ? (takilmakInput(previousState => previousState)) : (takilmakInput(previousState => !previousState))
-        kisaIliskiEntered ? (kisaIliskiInput(previousState => !previousState)) : (kisaIliskiInput(previousState => previousState))
-        uzunIliskiEntered ? (uzunIliskiInput(previousState => !previousState)) : (uzunIliskiInput(previousState => previousState))
-        yeniArkadasEntered ? (yeniArkadasInput(previousState => !previousState)) : (yeniArkadasInput(previousState => previousState))
-        eventDateEntered ? (eventDateInput(previousState => !previousState)) : (eventDateInput(previousState => previousState))
-        bilmiyorumEntered ? (bilmiyorumInput(previousState => !previousState)) : (bilmiyorumInput(previousState => previousState))
-    };
-    
-    const toggleKısaIliski = () => {
-        takilmakEntered ? (takilmakInput(previousState => !previousState)) : (takilmakInput(previousState => previousState))
-        kisaIliskiEntered ? (kisaIliskiInput(previousState => previousState)) : (kisaIliskiInput(previousState => !previousState))
-        uzunIliskiEntered ? (uzunIliskiInput(previousState => !previousState)) : (uzunIliskiInput(previousState => previousState))
-        yeniArkadasEntered ? (yeniArkadasInput(previousState => !previousState)) : (yeniArkadasInput(previousState => previousState))
-        eventDateEntered ? (eventDateInput(previousState => !previousState)) : (eventDateInput(previousState => previousState))
-        bilmiyorumEntered ? (bilmiyorumInput(previousState => !previousState)) : (bilmiyorumInput(previousState => previousState))
-    };
-
-    const toggleUzunIliski = () => {
-        takilmakEntered ? (takilmakInput(previousState => !previousState)) : (takilmakInput(previousState => previousState))
-        kisaIliskiEntered ? (kisaIliskiInput(previousState => !previousState)) : (kisaIliskiInput(previousState => previousState))
-        uzunIliskiEntered ? (uzunIliskiInput(previousState => previousState)) : (uzunIliskiInput(previousState => !previousState))
-        yeniArkadasEntered ? (yeniArkadasInput(previousState => !previousState)) : (yeniArkadasInput(previousState => previousState))
-        eventDateEntered ? (eventDateInput(previousState => !previousState)) : (eventDateInput(previousState => previousState))
-        bilmiyorumEntered ? (bilmiyorumInput(previousState => !previousState)) : (bilmiyorumInput(previousState => previousState))
-    };
-
-    const toggleYeniArkadas = () => {
-        takilmakEntered ? (takilmakInput(previousState => !previousState)) : (takilmakInput(previousState => previousState))
-        kisaIliskiEntered ? (kisaIliskiInput(previousState => !previousState)) : (kisaIliskiInput(previousState => previousState))
-        uzunIliskiEntered ? (uzunIliskiInput(previousState => !previousState)) : (uzunIliskiInput(previousState => previousState))
-        yeniArkadasEntered ? (yeniArkadasInput(previousState => previousState)) : (yeniArkadasInput(previousState => !previousState))
-        eventDateEntered ? (eventDateInput(previousState => !previousState)) : (eventDateInput(previousState => previousState))
-        bilmiyorumEntered ? (bilmiyorumInput(previousState => !previousState)) : (bilmiyorumInput(previousState => previousState))
-    };
-    const toggleEventDate = () => {
-        takilmakEntered ? (takilmakInput(previousState => !previousState)) : (takilmakInput(previousState => previousState))
-        kisaIliskiEntered ? (kisaIliskiInput(previousState => !previousState)) : (kisaIliskiInput(previousState => previousState))
-        uzunIliskiEntered ? (uzunIliskiInput(previousState => !previousState)) : (uzunIliskiInput(previousState => previousState))
-        yeniArkadasEntered ? (yeniArkadasInput(previousState => !previousState)) : (yeniArkadasInput(previousState => previousState))
-        eventDateEntered ? (eventDateInput(previousState => previousState)) : (eventDateInput(previousState => !previousState))
-        bilmiyorumEntered ? (bilmiyorumInput(previousState => !previousState)) : (bilmiyorumInput(previousState => previousState))
-    };
-    const toggleBilmiyorum = () => {
-        takilmakEntered ? (takilmakInput(previousState => !previousState)) : (takilmakInput(previousState => previousState))
-        kisaIliskiEntered ? (kisaIliskiInput(previousState => !previousState)) : (kisaIliskiInput(previousState => previousState))
-        uzunIliskiEntered ? (uzunIliskiInput(previousState => !previousState)) : (uzunIliskiInput(previousState => previousState))
-        yeniArkadasEntered ? (yeniArkadasInput(previousState => !previousState)) : (yeniArkadasInput(previousState => previousState))
-        eventDateEntered ? (eventDateInput(previousState => !previousState)) : (eventDateInput(previousState => previousState))
-        bilmiyorumEntered ? (bilmiyorumInput(previousState => previousState)) : (bilmiyorumInput(previousState => !previousState))
-    };
-
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
+	const [beklenti, setBeklenti] = React.useState([0, 0, 0, 0, 0, 0]);
    
     return(
         <View style = { commonStyles.Container }>
@@ -116,9 +54,9 @@ const Beklenti = props => {
                 </MaskedView>
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:70}]}
-					onPress={toggleTakilmak}
+					onPress={() => { setBeklenti([1, 0, 0, 0, 0, 0]); }}
 				>
-					{takilmakEntered ? (
+					{beklenti[0] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -158,9 +96,9 @@ const Beklenti = props => {
                 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", margin: 140}]}
-					onPress={toggleKısaIliski}
+					onPress={() => { setBeklenti([0, 1, 0, 0, 0, 0]); }}
 				>
-					{kisaIliskiEntered ? (
+					{beklenti[1] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -200,9 +138,9 @@ const Beklenti = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:210}]}
-					onPress={toggleUzunIliski}
+					onPress={() => { setBeklenti([0, 0, 1, 0, 0, 0]); }}
 				>
-					{uzunIliskiEntered ? (
+					{beklenti[2] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -242,9 +180,9 @@ const Beklenti = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:280 }]}
-					onPress={toggleYeniArkadas}
+					onPress={() => { setBeklenti([0, 0, 0, 1, 0, 0]); }}
 				>
-					{yeniArkadasEntered ? (
+					{beklenti[3] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -284,9 +222,9 @@ const Beklenti = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:350 }]}
-					onPress={toggleEventDate}
+					onPress={() => { setBeklenti([0, 0, 0, 0, 1, 0]); }}
 				>
-					{eventDateEntered ? (
+					{beklenti[4] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -326,9 +264,9 @@ const Beklenti = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:420 }]}
-					onPress={toggleBilmiyorum}
+					onPress={() => { setBeklenti([0, 0, 0, 0, 0, 1]); }}
 				>
-					{bilmiyorumEntered ? (
+					{beklenti[5] == 1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}

@@ -20,55 +20,9 @@ const CinselYönelim = props => {
         props.navigation.navigate("Foto");
     };
     
+	const [yönelim, setYönelim] = React.useState([0, 0, 0, 0, 0]);
     
-
-    const [heteroEntered, heteroInput] = useState(false);
-    const [homoEntered, homoInput] = useState(false);
-    const [biseksüelEntered, biseksüelInput] = useState(false);
-    const [panseksüelEntered, panseksüelInput] = useState(false);
-    const [aseksüelEntered, aseksüelInput] = useState(false);
     const [isEnabled, setIsEnabled] = useState(true);
-
-    
-    const toggleHetero = () => {
-        heteroEntered ? (heteroInput(previousState => previousState)) : (heteroInput(previousState => !previousState))
-        homoEntered ? (homoInput(previousState => !previousState)) : (homoInput(previousState => previousState))
-        biseksüelEntered ? (biseksüelInput(previousState => !previousState)) : (biseksüelInput(previousState => previousState))
-        panseksüelEntered ? (panseksüelInput(previousState => !previousState)) : (panseksüelInput(previousState => previousState))
-        aseksüelEntered ? (aseksüelInput(previousState => !previousState)) : (aseksüelInput(previousState => previousState))
-    };
-    
-    const toggleHomo = () => {
-        heteroEntered ? (heteroInput(previousState => !previousState)) : (heteroInput(previousState => previousState))
-        homoEntered ? (homoInput(previousState => previousState)) : (homoInput(previousState => !previousState))
-        biseksüelEntered ? (biseksüelInput(previousState => !previousState)) : (biseksüelInput(previousState => previousState))
-        panseksüelEntered ? (panseksüelInput(previousState => !previousState)) : (panseksüelInput(previousState => previousState))
-        aseksüelEntered ? (aseksüelInput(previousState => !previousState)) : (aseksüelInput(previousState => previousState))
-    };
-
-    const toggleBiseksüel = () => {
-        heteroEntered ? (heteroInput(previousState => !previousState)) : (heteroInput(previousState => previousState))
-        homoEntered ? (homoInput(previousState => !previousState)) : (homoInput(previousState => previousState))
-        biseksüelEntered ? (biseksüelInput(previousState => previousState)) : (biseksüelInput(previousState => !previousState))
-        panseksüelEntered ? (panseksüelInput(previousState => !previousState)) : (panseksüelInput(previousState => previousState))
-        aseksüelEntered ? (aseksüelInput(previousState => !previousState)) : (aseksüelInput(previousState => previousState))
-    };
-
-    const togglePanseksüel = () => {
-        heteroEntered ? (heteroInput(previousState => !previousState)) : (heteroInput(previousState => previousState))
-        homoEntered ? (homoInput(previousState => !previousState)) : (homoInput(previousState => previousState))
-        biseksüelEntered ? (biseksüelInput(previousState => !previousState)) : (biseksüelInput(previousState => previousState))
-        panseksüelEntered ? (panseksüelInput(previousState => previousState)) : (panseksüelInput(previousState => !previousState))
-        aseksüelEntered ? (aseksüelInput(previousState => !previousState)) : (aseksüelInput(previousState => previousState))
-    };
-    const toggleAseksüel = () => {
-        heteroEntered ? (heteroInput(previousState => !previousState)) : (heteroInput(previousState => previousState))
-        homoEntered ? (homoInput(previousState => !previousState)) : (homoInput(previousState => previousState))
-        biseksüelEntered ? (biseksüelInput(previousState => !previousState)) : (biseksüelInput(previousState => previousState))
-        panseksüelEntered ? (panseksüelInput(previousState => !previousState)) : (panseksüelInput(previousState => previousState))
-        aseksüelEntered ? (aseksüelInput(previousState => previousState)) : (aseksüelInput(previousState => !previousState))
-    };
-    
 
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -105,9 +59,9 @@ const CinselYönelim = props => {
                 </MaskedView>
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:70}]}
-					onPress={toggleHetero}
+					onPress={() => { setYönelim([1, 0, 0, 0 ,0]); }}
 				>
-					{heteroEntered ? (
+					{yönelim[0]==1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -147,9 +101,9 @@ const CinselYönelim = props => {
                 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", margin: 140}]}
-					onPress={toggleHomo}
+					onPress={() => { setYönelim([0, 1, 0, 0 ,0]); }}
 				>
-					{homoEntered ? (
+					{yönelim[1]==1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -189,9 +143,9 @@ const CinselYönelim = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:210}]}
-					onPress={toggleBiseksüel}
+					onPress={() => { setYönelim([0, 0, 1, 0 ,0]); }}
 				>
-					{biseksüelEntered ? (
+					{yönelim[2]==1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -231,9 +185,9 @@ const CinselYönelim = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:280 }]}
-					onPress={togglePanseksüel}
+					onPress={() => { setYönelim([0, 0, 0, 1, 0]); }}
 				>
-					{panseksüelEntered ? (
+					{yönelim[3]==1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -273,9 +227,9 @@ const CinselYönelim = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:350 }]}
-					onPress={toggleAseksüel}
+					onPress={() => { setYönelim([0, 0, 0, 0 ,1]); }}
 				>
-					{aseksüelEntered ? (
+					{yönelim[4]==1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}

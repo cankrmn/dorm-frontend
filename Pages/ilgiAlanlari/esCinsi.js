@@ -21,32 +21,8 @@ const EsCinsi = props => {
     };
     
     
-    const [kadinEntered, kadinInput] = useState(false);
-    const [erkekEntered, erkekInput] = useState(false);
-    const [herkesEntered, herkesInput] = useState(false);
+	const [escinsi, setEscinsi] = React.useState([0, 0, 0]);
 
-    
-    const toggleKadin = () => {
-        kadinEntered ? (kadinInput(previousState => previousState)) : (kadinInput(previousState => !previousState))
-        erkekEntered ? (erkekInput(previousState => !previousState)) : (erkekInput(previousState => previousState))
-        herkesEntered ? (herkesInput(previousState => !previousState)) : (herkesInput(previousState => previousState))
-    };
-    
-    const toggleErkek = () => {
-        kadinEntered ? (kadinInput(previousState => !previousState)) : (kadinInput(previousState => previousState))
-        erkekEntered ? (erkekInput(previousState => previousState)) : (erkekInput(previousState => !previousState))
-        herkesEntered ? (herkesInput(previousState => !previousState)) : (herkesInput(previousState => previousState))
-    };
-
-    const toggleHerkes = () => {
-        kadinEntered ? (kadinInput(previousState => !previousState)) : (kadinInput(previousState => previousState))
-        erkekEntered ? (erkekInput(previousState => !previousState)) : (erkekInput(previousState => previousState))
-        herkesEntered ? (herkesInput(previousState => previousState)) : (herkesInput(previousState => !previousState))
-    };
-
-
-
-   
     return(
         <View style = { commonStyles.Container }>
             <StatusBar style={"dark"} />
@@ -79,9 +55,9 @@ const EsCinsi = props => {
                 </MaskedView>
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:80}]}
-					onPress={toggleKadin}
+					onPress={() => { setEscinsi([1, 0, 0]); }}
 				>
-					{kadinEntered ? (
+					{escinsi[0]==1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -121,9 +97,9 @@ const EsCinsi = props => {
                 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", margin: 160}]}
-					onPress={toggleErkek}
+					onPress={() => { setEscinsi([0, 1, 0]); }}
 				>
-					{erkekEntered ? (
+					{escinsi[1]==1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
@@ -163,9 +139,9 @@ const EsCinsi = props => {
 
                 <TouchableOpacity
 					style={[commonStyles.girisButton, { position: "absolute", marginTop:240}]}
-					onPress={toggleHerkes}
+					onPress={() => { setEscinsi([0, 0, 1]); }}
 				>
-					{herkesEntered ? (
+					{escinsi[2]==1 ? (
 						<LinearGradient
 							colors={["#4136F1", "#8743FF"]}
 							start={{ x: 0, y: 0 }}
