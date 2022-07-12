@@ -36,7 +36,7 @@ import { AuthContext } from "../../nonVisualComponents/Context";
 import Card from "./Card";
 import { Session } from "../../nonVisualComponents/SessionVariables";
 
-import abortController from "../../components/custom_hooks/abortController";
+import abortController from "../../hooks/useAbortController";
 import crypto from "../../functions/crypto";
 
 const { width, height, fontScale } = Dimensions.get("window");

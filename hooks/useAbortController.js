@@ -1,6 +1,6 @@
 import React from "react";
 
-const abortController = () => {
+const useAbortController = () => {
 	React.useEffect(() => {
 		console.log("connected");
 		let abortController = new AbortController();
@@ -11,4 +11,4 @@ const abortController = () => {
 	}, []);
 };
 
-export default abortController;
+export default useAbortController;

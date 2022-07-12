@@ -22,7 +22,6 @@ const { width, height } = Dimensions.get("window");
 
 export default function MatchModal({ navigation, route }) {
 	const { firstImg, secondImg, name } = route.params;
-	// console.log(route)
 	return (
 		<View style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
 			<Pressable

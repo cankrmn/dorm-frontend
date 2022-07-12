@@ -65,9 +65,10 @@ import LikeEndedModal from "../Pages/modals/LikeEndedModal";
 import MatchModal from "../Pages/modals/MatchModal";
 import ListEndedModal from "../Pages/modals/ListEndedModal";
 
-import useKeyGenerator from "../components/custom_hooks/useKeyGenerator";
+import useKeyGenerator from "../hooks/useKeyGenerator";
 import crypto from "../functions/crypto";
 import UpdateNeededModal from "../Pages/modals/UpdateNeededModal";
+import CustomModal from "../components/modal.component";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -523,7 +524,8 @@ export default function StackNavigator() {
 				{/* <StatusBar style={"auto"} /> */}
 				<NavigationContainer>
 					<AuthContext.Provider value={authContext}>
-						<Stack.Navigator mode={"modal"}>
+						{/* <Stack.Navigator mode={"modal"}> */}
+						<Stack.Navigator initialRouteName="CustomModal">
 							{updateNeeded ? (
 								<Stack.Group screenOptions={{ headerShown: false }}>
 									<Stack.Screen
@@ -585,6 +587,26 @@ export default function StackNavigator() {
 									name="ListEndedModal"
 									component={ListEndedModal}
 									options={{ presentation: "transparentModal" }}
+								/>
+								<Stack.Screen
+									name="CustomModal"
+									component={CustomModal}
+									options={{ presentation: "transparentModal" }}
+									initialParams={{
+										// dismiss: () => {},
+										image: "sad_face",
+										title: "Başlık",
+										body: "Şu an için etrafta kimse kalmadı gibi duruyor. Ama sakın umutsuzluğa kapılma. En kısa zamanda tekrar uğramayı unutma!",
+										buttons: [
+											{
+												buttonType: "gradient",
+												text: "Deniyorum",
+												onPress: () => {
+													console.log("Deniyorum");
+												},
+											},
+										],
+									}}
 								/>
 							</Stack.Group>
 						</Stack.Navigator>

@@ -9,7 +9,6 @@ import {
 	FlatList,
 	TouchableOpacity,
 	Text,
-	TouchableHighlight,
 } from "react-native";
 import Animated, {
 	useSharedValue,
